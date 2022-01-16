@@ -136,6 +136,7 @@ const g = { // Gun info here
     lessreload:         [1.5,   1,     1,      1,      1,      1,      1,      1,      1,      1,      1,      1,      1], 
     threequartersrof:   [1.333, 1,     1,      1,      1,      1,      1,      1,      1,      1,      1,      1,      1], 
     morespeed:          [1,     1,     1,      1,      1,      1,      1,      1.3,    1.3,    1,      1,      1,      1], 
+    doublespeed:        [1,     1,     1,      1,      1,      1,      1,      2,    2,    1,      1,      1,      1], 
     bitlessspeed:       [1,     1,     1,      1,      1,      1,      1,      0.93,   0.93,   1,      1,      1,      1], 
     slow:               [1,     1,     1,      1,      1,      1,      1,      0.7,    0.7,    1,      1,      1,      1], 
     halfspeed:          [1,     1,     1,      1,      1,      1,      1,      0.5,    0.5,    1,      1,      1,      1],
@@ -1042,7 +1043,82 @@ exports.auto3gun = {
                 }, }
         ],
     };
-
+exports.cruiserautogun = {
+  PARENT: [exports.genericTank],
+  LABEL: "",
+  BODY: {
+    FOV: 2
+  },
+  CONTROLLERS: [
+    "canRepel",
+    "onlyAcceptInArc",
+    "mapAltToFire",
+    "nearestDifferentMaster"
+  ],
+  COLOR: 16,
+  HAS_NO_RECOIL: true,
+  GUNS: [
+    {
+      /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+      POSITION: [7, 7.5, 0.6, 7, 4, 0, 0],
+      PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.swarm, g.halfreload, g.halfreload]),
+        TYPE: exports.swarm,
+        STAT_CALCULATOR: gunCalcNames.swarm
+      }
+    },
+    {
+      POSITION: [7, 7.5, 0.6, 7, -4, 0, 0.5],
+      PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.swarm, g.halfreload, g.halfreload]),
+        TYPE: exports.swarm,
+        STAT_CALCULATOR: gunCalcNames.swarm
+      }
+    }
+  ]
+};
+exports.gunnerautogun = {
+  PARENT: [exports.genericTank],
+  LABEL: "",
+  CONTROLLERS: [
+    "canRepel",
+    "onlyAcceptInArc",
+    "mapAltToFire",
+    "nearestDifferentMaster"
+  ],
+  COLOR: 16,
+  GUNS: [
+    {
+            /*** LENGTH  WIDTH   ASPECT    X       Y     ANGLE   DELAY */
+      POSITION: [12, 3.5, 1, 0, 7.25, 0, 0.5],
+      PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast, g.doublespeed]),
+        TYPE: exports.bullet
+      }
+    },
+    {
+      POSITION: [12, 3.5, 1, 0, -7.25, 0, 0.75],
+      PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast, g.doublespeed]),
+        TYPE: exports.bullet
+      }
+    },
+    {
+      POSITION: [16, 3.5, 1, 0, 3.75, 0, 0],
+      PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast, g.doublespeed]),
+        TYPE: exports.bullet
+      }
+    },
+    {
+      POSITION: [16, 3.5, 1, 0, -3.75, 0, 0.25],
+      PROPERTIES: {
+        SHOOT_SETTINGS: combineStats([g.basic, g.twin, g.puregunner, g.fast, g.doublespeed]),
+        TYPE: exports.bullet
+      }
+    },
+  ]
+};
 exports.tritrapgun = {
     PARENT: [exports.genericTank],
     LABEL: '',
@@ -4255,7 +4331,69 @@ exports.miniboss = {
             ],
         };
     })();
-
+exports.sx2 = {
+  PARENT: [exports.controlminiboss],
+  LABEL: 'SX-2',
+  COLOR: 15,
+  SHAPE: 5,
+  SIZE: 25,
+  VALUE: 150000,
+  BODY: {
+      FOV: 1.4,
+      SPEED: base.SPEED * 1.4,
+      HEALTH: base.HEALTH * 1.5,
+      SHIELD: base.SHIELD * 1.5,
+      REGEN: base.REGEN,
+      DAMAGE: base.DAMAGE * 2.5
+  },
+  TURRETS: [
+    {
+      /*  SIZE     X       Y     ANGLE    ARC */
+      POSITION: [11, 8, 0, 36, 180, 0],
+      TYPE: exports.gunnerautogun
+    },
+    {
+      POSITION: [11, 8, 0, 108, 180, 0],
+      TYPE: exports.gunnerautogun
+    },
+    {
+      POSITION: [11, 8, 0, 180, 180, 0],
+      TYPE: exports.gunnerautogun
+    },
+    {
+      POSITION: [11, 8, 0, 252, 180, 0],
+      TYPE: exports.gunnerautogun
+    },
+    {
+      POSITION: [11, 8, 0, 324, 180, 0],
+      TYPE: exports.gunnerautogun
+    },
+    {
+      POSITION: [4, 7.825, 0, 0, 360, 1],
+      TYPE: exports.cruiserautogun
+    },
+    {
+      POSITION: [4, 7.825, 0, 72, 360, 1],
+      TYPE: exports.cruiserautogun
+    },
+    {
+      POSITION: [4, 7.825, 0, 144, 360, 1],
+      TYPE: exports.cruiserautogun
+    },
+    {
+      POSITION: [4, 7.825, 0, 216, 360, 1],
+      TYPE: exports.cruiserautogun
+    },
+    {
+      POSITION: [4, 7.825, 0, 288, 360, 1],
+      TYPE: exports.cruiserautogun
+    },
+    {
+      POSITION: [9.5, 0, 0, 0, 360, 1],
+      TYPE: exports.sniper3gun
+    },
+  ],
+};
 exports.bot = {
     AUTO_UPGRADE: 'random',
     FACING_TYPE: 'looseToTarget',
